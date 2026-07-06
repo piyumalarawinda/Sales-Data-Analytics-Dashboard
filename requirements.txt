@@ -1,0 +1,35 @@
+# Core Data Processing
+pandas==2.1.4
+numpy==1.26.3
+scipy==1.11.4
+
+# Visualization
+matplotlib==3.8.2
+seaborn==0.13.0
+plotly==5.18.0
+streamlit==1.28.1
+
+# Machine Learning
+scikit-learn==1.3.2
+xgboost==2.0.3
+shap==0.43.0
+statsmodels==0.14.0
+
+# Database & APIs
+sqlalchemy==2.0.23
+psycopg2-binary==2.9.9
+fastapi==0.104.1
+uvicorn==0.24.0
+pydantic==2.5.0
+
+# Data Quality & Testing
+pytest==7.4.3
+pytest-cov==4.1.0
+pandas-profiling==3.6.6
+great-expectations==0.17.12
+
+# Utilities
+python-dotenv==1.0.0
+pyyaml==6.0.1
+logging-json==0.2
+requests==2.31.0
