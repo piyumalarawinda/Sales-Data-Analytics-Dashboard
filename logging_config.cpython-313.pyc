@@ -1,0 +1,32 @@
+"""
+Configuration settings for the data analyst project.
+"""
+
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+# Paths
+DATA_RAW_PATH = os.getenv('DATA_RAW_PATH', './data/raw')
+DATA_PROCESSED_PATH = os.getenv('DATA_PROCESSED_PATH', './data/processed')
+MODELS_PATH = os.getenv('MODELS_PATH', './models')
+REPORTS_PATH = os.getenv('REPORTS_PATH', './reports')
+
+# Database
+DATABASE_URL = os.getenv('DATABASE_URL', 'sqlite:///data.db')
+DATABASE_ECHO = os.getenv('DATABASE_ECHO', 'False').lower() == 'true'
+
+# API
+API_HOST = os.getenv('API_HOST', '0.0.0.0')
+API_PORT = int(os.getenv('API_PORT', 8000))
+API_RELOAD = os.getenv('API_RELOAD', 'True').lower() == 'true'
+
+# ML
+RANDOM_STATE = int(os.getenv('RANDOM_STATE', 42))
+TEST_SIZE = float(os.getenv('TEST_SIZE', 0.2))
+CV_FOLDS = int(os.getenv('CV_FOLDS', 5))
+
+# Logging
+LOG_LEVEL = os.getenv('LOG_LEVEL', 'INFO')
+LOG_FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'

@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:14
+    environment:
+      POSTGRES_USER: analyst
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: analytics
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - analytics_network
+
+  # Python API Server
+  api:
+    build: .
+    command: uvicorn src.api_server:app --host 0.0.0.0 --port 8000
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://analyst:password@postgres:5432/analytics
+      API_HOST: 0.0.0.0
+      API_PORT: 8000
+    depends_on:
+      - postgres
+    networks:
+      - analytics_network
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./reports:/app/reports
+
+  # Streamlit Dashboard
+  streamlit:
+    build: .
+    command: streamlit run examples/streamlit_dashboard.py --server.port=8501
+    ports:
+      - "8501:8501"
+    networks:
+      - analytics_network
+    volumes:
+      - ./data:/app/data
+      - ./reports:/app/reports
+
+volumes:
+  postgres_data:
+
+networks:
+  analytics_network:
+    driver: bridge
